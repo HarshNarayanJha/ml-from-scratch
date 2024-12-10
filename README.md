@@ -51,3 +51,31 @@ A Too low rate will never reach the min MSE, while a too high rate will just kee
   - Calculate error
   - Use gradient descent to figure out new weight and bias
   - Repeat n times
+
+### 3. Logistic Regression
+
+Unline linear regression, we find a probability dstribution map, using the logistic function, generally the sigmoid function
+
+$$ s(x) = /frac{1}{1 + e^{-x}} $$
+
+So the regression equation becomes
+
+$$ \hat{y} = h_{\theta}(x) = /frac{1}{1 + e^{-(wx+b)}} $$
+
+We calculate the error not using MSE, but the Cross Entropy. It is still the derivative of the regression equation.
+Gradient Descent is used for adjustments, which calculates the derivates wrt weight and bias. Same equations!
+
+#### **Steps**:
+
+- **Training**:
+  - Initialize weights as zeros (or prefer random values)
+  - Initialize biases as zeros (or prefer random values)
+- **Given a data point**:
+  - Predict result by using $\hat{y} = \frac{1}{1 + e^{-(wx + b)}}$
+  - Calculate error
+  - Use gradient descent to figure out new weight and bias values
+  - Repeat n times
+- **Testing**
+  - Given a data point:
+    - Put the values from the data point into the equation $\hat{y} = \frac{1}{1 + e^{-wx + b}}$
+    - Choose label based on probability
