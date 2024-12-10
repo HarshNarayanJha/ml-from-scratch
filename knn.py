@@ -29,6 +29,6 @@ class KNN:
         prediction = Counter(K_nearest_labels).most_common()[0][0]
 
         # return average for regression
-        regression = np.average(K_nearest_labels)
+        _regression = np.average(K_nearest_labels)
 
         return prediction
