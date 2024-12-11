@@ -230,3 +230,72 @@ $$ A\tilde{v} = \lambda\tilde{v} $$
 - Transform the original n-dimensional data point into k dimensions ( = Projections with dot product)
 
 Find the implementation in the file `pca.py`
+
+
+### 8. Perceptron
+
+The perceptron is an algorithm for supervised learning of binary classifiers.
+It can be seen as a single unit of an artificial neural network and is also known as the prototype for Neural Nets.
+
+**Single Layer Perceptron: Can only learn linearly separable patterns**
+Multi Layer Perceptron: Can learn more complex patterns
+
+#### Inspired by Neuron
+It's a simplified model of a biological neuron and simulates the behaviour of one cell.
+For us, it is a single-layer neural network with the unit step function as an activation function.
+
+```mermaid
+graph LR
+  1((1)) --> |w0| s{Σ}
+  x1((x1)) --> |w1| s
+  x2((x2)) --> |w2| s
+  xn((xn)) --> |wn| s
+  s --> step[Activation Function | Step Function] --> out(Output)
+```
+
+#### **Linear Model**
+$$ f(x) = w^T x + b $$
+
+#### **Activation Function**
+Unit step function
+$$ g(x) = \begin{cases}
+1 & \text{if } z \ge \theta \\
+0 & \text{otherwise}
+\end{cases} $$
+
+#### **Approximation**
+$$ \hat{y} = g(f(x)) = g(w^T x + b) $$
+
+#### **Perceptron Update Rule**
+Super intiutive and amazing, gradient descent
+
+$w = w + \delta w$
+
+$b = b + \delta b$
+
+$\delta w = \alpha \cdot (y_i - \hat{y_i}) \cdot x_i$
+
+$\delta b = \alpha \cdot (y_i - \hat{y_i}) \cdot x_i$
+
+Learning rate $\alpha$ is in [0, 1], generally small, defines how fast to descent on the gradient
+
+| $y$ | $\hat{y} | $y - \hat{y}$ |
+| --- | -------- | ------------- |
+| 1   | 1        | 0             |
+| 1   | 0        | 1             |
+| 0   | 0        | 1             |
+| 0   | 1        | -1            |
+
+--> Weights are automatically pushed towards positive or negative target class in case of missclassification!
+
+This is a very intiutive model!
+
+#### **Steps**:
+- **Training (Learn Weights)**:
+  - Intialize weights
+  - For each sample:
+    - Calculate $\hat{y} = g(f(x)) = g(w^T x + b)$
+    - Apply update rule: $\delta w = \alpha \cdot (y_i - \hat{y_i}) \cdot x_i,\ \delta b = \alpha \cdot (y_i - \hat{y_i})$
+
+- **Prediction**:
+  - Calculate $\hat{y} = g(f(x)) = g(w^T x + b)$
