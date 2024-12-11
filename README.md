@@ -144,3 +144,47 @@ Random Forest creates a specified number of trees (naturally)! on a random subse
     - _Regression_: get the mean of the precitions
 
 Find the implementation in the file `random_forest.py`
+
+
+### 6. Naive Bayes
+
+The Naive Bayes classifier is a "probabilistic classifier" based on applying Bayes' theorem with strong (naive) independence assumptions between the features.
+
+Bayes' Theorem states
+$$ P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)} $$
+
+Translating to our case, we have
+
+$$ P(y|X) = \frac{P(X|y) \cdot P(y)}{P(X)} $$
+Where, y are the class labels while X is the feature vector.
+
+Now for this, the features must be mutually independent.
+$$ P(y|X) = \frac{P(X|y) \cdot P(y)}{P(X)} $$
+$$ \downarrow $$
+$$ P(y|X) = \frac{P(x_1|y) \cdot P(x_2|y) \cdot P(x_3|y) \cdot \dots \cdot P(y)}{P(X)} $$
+
+Select class with highest posterior porbability (that $P(y|X)$ )
+
+$$ y = argmax_y P(y|X) $$
+since it contains product terms, and each probability is between 0 and 1, multiplication can result in exteml
+$$ y = argmax_y log(P(x_1|y)) + log(P(x_2|y) + ... + log(P(x_n|y)) + log(P(y)) $$
+
+#### Prior and Class Conditional
+
+$P(y)$ - Prior probability --> Frequency of each class
+$P(x_i|y)$ - Class conditional probability --> Model with Gaussian
+
+Gaussian Formula
+$$ P(x_i|y) = \frac{1}{\sqrt{2 \pi \sigma_y^2}} \cdot exp(-\frac{(x_i - \mu_y)^2}{2\sigma_y^2}) $$
+
+#### **Steps**:
+
+- **Training:**
+  - Calculate mean, var, and prior (frequency) for each class
+
+- **Predictions:**
+  - Calculate posterior for each class with $y = argmax_y log(P(x_1|y)) + log(P(x_2|y) + ... + log(P(x_n|y)) + log(P(y))$ and the Gaussian formula
+  - Choose class with highest posterior probability
+
+
+Find the implementation in the file `naive_bayes.py`

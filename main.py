@@ -6,6 +6,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 from decision_tree import DecisionTree
+from naive_bayes import NaiveBayes
 from random_forest import RandomForest
 from knn import KNN
 from linear_regression import LinearRegression
@@ -173,3 +174,23 @@ def do_random_forest():
 
 
 # %% Cell Naive Bayes
+
+
+def do_naive_bayes():
+    X, y = datasets.make_classification(
+        n_samples=100, n_features=10, n_classes=2, random_state=50
+    )
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    nb = NaiveBayes()
+    nb.fit(X_train, y_train)
+    predictions = nb.predict(X_test)
+
+    def accuracy(y_test, y_pred):
+        return np.sum(y_test == y_pred) / len(y_test)
+
+    print(accuracy(y_test, predictions))
+
+
+do_naive_bayes()
