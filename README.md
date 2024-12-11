@@ -123,3 +123,24 @@ Where, $p(X) = \frac{\#x}{n}$, i.e. the number of times class in node / number o
 **Stopping Criteria**: Maximum depth, minimum number of samples, min impurity decrease.
 
 Find the implementation in the file `decision_tree.py`
+
+
+### 5. Random Forest
+
+Random Forest creates a specified number of trees (naturally)! on a random subset of samples, and predicts based on the majority vote of all trees.
+
+#### **Steps**:
+
+- **Training**:
+  Given the whole dataset:
+    - Get a subset of the dataset randomly
+    - Create a decision tree
+    - Repeat for as many times as the number of trees
+
+- **Testing**:
+  Given a data point:
+    - Get the predictions from each tree
+    - _Classificiation_: hold a majority vote
+    - _Regression_: get the mean of the precitions
+
+Find the implementation in the file `random_forest.py`

@@ -6,6 +6,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 from decision_tree import DecisionTree
+from random_forest import RandomForest
 from knn import KNN
 from linear_regression import LinearRegression
 from logistic_regression import LogisticRegression
@@ -54,6 +55,7 @@ def do_knn_classify():
 
 # do_knn_classify()
 
+
 # %% Cell Linear Regression
 
 
@@ -86,6 +88,7 @@ def do_linear_regression():
 
 
 # do_linear_regression()
+
 
 # %% Cell Logistic Regression
 
@@ -137,4 +140,36 @@ def do_decision_tree():
 
     print(accuracy(y_test, predictions))
 
+
 do_decision_tree()
+
+# %% Cell Random Forest
+
+
+def do_random_forest():
+    X, y = datasets.make_classification(
+        n_samples=500,
+        n_features=3,
+        n_informative=2,
+        n_repeated=0,
+        n_redundant=1,
+        n_classes=2,
+        random_state=100,
+    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    clf = RandomForest(n_trees=100)
+    clf.fit(X_train, y_train)
+
+    predictions = clf.predict(X_test)
+
+    def accuracy(y_test, y_pred):
+        return np.sum(y_test == y_pred) / len(y_test)
+
+    print(accuracy(y_test, predictions))
+
+
+# do_random_forest()
+
+
+# %% Cell Naive Bayes
