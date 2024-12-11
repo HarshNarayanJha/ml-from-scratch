@@ -52,15 +52,17 @@ A Too low rate will never reach the min MSE, while a too high rate will just kee
   - Use gradient descent to figure out new weight and bias
   - Repeat n times
 
+Find the implementation in the file `linear_regression.py`
+
 ### 3. Logistic Regression
 
 Unline linear regression, we find a probability dstribution map, using the logistic function, generally the sigmoid function
 
-$$ s(x) = /frac{1}{1 + e^{-x}} $$
+$$ s(x) = \frac{1}{1 + e^{-x}} $$
 
 So the regression equation becomes
 
-$$ \hat{y} = h_{\theta}(x) = /frac{1}{1 + e^{-(wx+b)}} $$
+$$ \hat{y} = h_{\theta}(x) = \frac{1}{1 + e^{-(wx+b)}} $$
 
 We calculate the error not using MSE, but the Cross Entropy. It is still the derivative of the regression equation.
 Gradient Descent is used for adjustments, which calculates the derivates wrt weight and bias. Same equations!
@@ -77,5 +79,47 @@ Gradient Descent is used for adjustments, which calculates the derivates wrt wei
   - Repeat n times
 - **Testing**
   - Given a data point:
-    - Put the values from the data point into the equation $\hat{y} = \frac{1}{1 + e^{-wx + b}}$
+    - Put the values from the data point into the equation $\hat{y} = \frac{1}{1 + e^{-(wx + b)}}$
     - Choose label based on probability
+
+Find the implementation in the file `logistic_regression.py`
+
+### 4. Decision Trees
+
+Decision trees are hierarchical structures that split the data into subsets based on feature values.
+Starting from a root node containing all data, the algorithm recursively partitions the data by choosing optimal splitting criteria at each node.
+The goal is to create homogeneous groups in the leaf nodes.
+This makes the prediction data to trickle down the tree answer each splitting question, into it's catergory/classification
+
+We need to decide on the
+1. Split feature
+2. Split point
+3. When to stop splitting
+
+#### **Steps**:
+
+- **Training**:
+  Given the whole dataset:
+    - Calculate _information gain_ with each possible split
+    - Divide set with that feature and value that gives the most IG
+    - Divide tree and do the same for all created branches...
+    - ...until a _stopping criteria_ is reached
+
+- **Testing**:
+  Given a data point:
+    - Follow the tree until you reach a leaf node
+    - Return the most common class label
+
+**Information Gain**: $IG = E(parent) - [weighted\  average] \cdot E(children)$
+
+where E(x) is entropy, lack of order.
+Entropy of a node is zero is there is only one class in it.
+Entropy is 1 if classes are evenly spread in a node
+
+**Entropy**: $E = - \sum{p(X) \cdot log_2(p(X))}$
+
+Where, $p(X) = \frac{\#x}{n}$, i.e. the number of times class in node / number of total nodes
+
+**Stopping Criteria**: Maximum depth, minimum number of samples, min impurity decrease.
+
+Find the implementation in the file `decision_tree.py`

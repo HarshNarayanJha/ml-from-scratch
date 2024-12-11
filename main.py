@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
+from decision_tree import DecisionTree
 from knn import KNN
 from linear_regression import LinearRegression
 from logistic_regression import LogisticRegression
@@ -111,4 +112,29 @@ def do_logistic_regression():
     print(accuracy(y_test, predictions))
 
 
-do_logistic_regression()
+# do_logistic_regression()
+
+
+# %% Cell Desicion Tree
+def do_decision_tree():
+    X, y = datasets.make_classification(
+        n_samples=500,
+        n_features=3,
+        n_informative=2,
+        n_repeated=0,
+        n_redundant=1,
+        n_classes=2,
+        random_state=100,
+    )
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    clf = DecisionTree(max_depth=200)
+    clf.fit(X_train, y_train)
+    predictions = clf.predict(X_test)
+
+    def accuracy(y_test, y_pred):
+        return np.sum(y_test == y_pred) / len(y_test)
+
+    print(accuracy(y_test, predictions))
+
+do_decision_tree()
