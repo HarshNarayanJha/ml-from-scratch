@@ -188,3 +188,45 @@ $$ P(x_i|y) = \frac{1}{\sqrt{2 \pi \sigma_y^2}} \cdot exp(-\frac{(x_i - \mu_y)^2
 
 
 Find the implementation in the file `naive_bayes.py`
+
+
+### 7. Principal Component Analysis (PCA)
+
+Principal Component Analysis, or PCA, is an **unsupervised learning method** that is often used to reduce the dimensionality of the dataset
+by transforming a large set into a lower dimensional set that still retains most of the information. Therefore, we do not need to know the class labels!
+
+PCA find a new set of dimensions such that all the dimensions are orthogonal (and hence linearly independent)
+and ranked according to the variance of data along them.
+
+Find a transformation such that
+- The transformed features are **linearly independent**
+- **Dimensionality can be reduced** by taking only the dimensions with the highest importance
+- Those newly found dimensions should **minimize the projection error**
+- The projected points should have maximum spread, i.e. **maximum variance**
+
+#### **Variance**
+How much variation or spread the data has
+$$ Var(X) = \frac{1}{n}\sum(X_i - \bar{x})^2 $$
+
+#### **Covariance Matrix**
+Indicates the level to which two variables vary together
+$$ Cov(X, Y) = \frac{1}{n}\sum(X_i - \bar{x})(Y_i - \bar{Y})^T $$
+$$ Cov(X, X) = \frac{1}{n}\sum(X_i - \bar{x})(X_i - \bar{X})^T $$
+
+#### **Eigenvector, Eigenvalues**
+
+Calculate eigenvectors of $Cov(X, X)$
+
+The eigenvectors point in the direc=ction of the maximum variance, and the corresponding eigenvalues indiate the importance of its corresponding eigenvector.
+
+$$ A\tilde{v} = \lambda\tilde{v} $$
+
+#### **Steps**:
+- Subtract mean from X
+- Calculate Cov(X, X)
+- Calculate eigenvectors and eigenvalues of the covariance matrix
+- Sort the eigenvectors according to thier eigenvalues in decreasing order
+- Choose first k eigenvectors and that will be the new k dimensions
+- Transform the original n-dimensional data point into k dimensions ( = Projections with dot product)
+
+Find the implementation in the file `pca.py`

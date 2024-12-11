@@ -1,16 +1,17 @@
 # %% Cell 1
-from matplotlib.colors import ListedColormap
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import ListedColormap
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 from decision_tree import DecisionTree
-from naive_bayes import NaiveBayes
-from random_forest import RandomForest
 from knn import KNN
 from linear_regression import LinearRegression
 from logistic_regression import LogisticRegression
+from naive_bayes import NaiveBayes
+from pca import PCA
+from random_forest import RandomForest
 
 # %% Cell KNN
 
@@ -193,4 +194,33 @@ def do_naive_bayes():
     print(accuracy(y_test, predictions))
 
 
-do_naive_bayes()
+# do_naive_bayes()
+
+# %% Cell PCA
+
+
+def do_pca():
+    data = datasets.load_iris()
+    X, y = data.data, data.target
+
+    pca = PCA(2)
+    pca.fit(X)
+    X_projected = pca.transform(X)
+
+    print(f"Shape of X: {X.shape}")
+    print(f"Shape of transformed X: {X_projected.shape}")
+
+    x1 = X_projected[:, 0]
+    x2 = X_projected[:, 1]
+
+    plt.scatter(
+        x1, x2, c=y, edgecolors="none", alpha=0.8, cmap=plt.get_cmap("viridis", 3)
+    )
+
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    plt.colorbar()
+    plt.show()
+
+
+# do_pca()
