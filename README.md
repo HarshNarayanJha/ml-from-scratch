@@ -299,3 +299,42 @@ This is a very intiutive model!
 
 - **Prediction**:
   - Calculate $\hat{y} = g(f(x)) = g(w^T x + b)$
+
+Find the implementation in the file `perceptron.py`
+
+
+
+### 9. Support Vector Machine (SVM)
+
+Idea: Use a linear model and try to find a linear decision boundary (also called a hyperplane) that best spearates the data.
+The best hyperplane is the one that yields the largest separation/margin between both classes.
+So we choose the hyperplane so that the distance from it to the nearest data point on each side is maximized.
+
+$$ w \cdot x_i - b \ge 1\ if\ y_i = 1 $$
+$$ w \cdot x_i - b \le -1\ if\ y_i = -1 $$
+$$ y_i (w \cdot x_i - b) \ge 1, with\ y \in {-1, 1} $$
+
+
+#### **Loss Function: Hinge Loss**
+
+$$ l = max(0, 1 - y_i (w \cdot x_i - b)) $$
+
+$$ l = \begin{cases}
+0 & \text{if } y \cdot f(x) \ge 1 \\
+1 - y \codt f(x) & \text{otherwise}
+\end{cases} $$
+
+Rest is still too complex for me to understand right now. I will take a look at them later
+
+
+#### **Steps**:
+- **Training**:
+  - Initialize weights
+  - Make sure $y \in {-1, 1}$
+  - Apply update rules for _n_iters_
+
+- **Prediction**
+  - Calculate $y = sign(w \cdot x - b)$
+
+
+Find the implementation in the file `svm.py`

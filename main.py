@@ -13,6 +13,7 @@ from logistic_regression import LogisticRegression
 from naive_bayes import NaiveBayes
 from pca import PCA
 from random_forest import RandomForest
+from svm import SVM
 
 # %% Cell KNN
 
@@ -269,3 +270,30 @@ def do_perceptron():
 
 
 do_perceptron()
+
+
+# %% Cell SVM
+
+
+def do_svm():
+    X, y = datasets.make_blobs(
+        n_samples=50,
+        n_features=2,
+        centers=2,
+        cluster_std=1.05,
+        random_state=17,
+    )
+    y = np.where(y <= 0, -1, 1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+    clf = SVM()
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    def accuracy(y_test, y_pred):
+        return np.sum(y_test == y_pred) / len(y_test)
+
+    print(accuracy(y_test, y_pred))
+
+
+do_svm()
