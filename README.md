@@ -338,3 +338,22 @@ Rest is still too complex for me to understand right now. I will take a look at 
 
 
 Find the implementation in the file `svm.py`
+
+
+### 10. KMeans
+
+KMeans is an **unsupervised learning** method (unlabeled data) that clusters data set into k different clusters.
+Each sample is assigned to the cluster with the nearest means, and then the mean (centroids) and cluster are updated during an interative optimization process.
+
+#### Interative Optimization Process
+
+1. Initialize cluster centers (e.g. randomly)
+2. Repear until converged:
+  - Update cluster labels: Assign points to the nearest cluster center (centroid)
+  - Update cluster centers (centroid): Set center to the mean of each cluster
+
+
+#### Educlidean Distance
+
+Get the distance between two feature vectors
+$$ d(p, q) = \sqrt{\sum (p_i - q_i)^2} $$

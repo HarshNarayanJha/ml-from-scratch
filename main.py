@@ -6,6 +6,7 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 
 from decision_tree import DecisionTree
+from kmeans import KMeans
 from perceptron import Perceptron
 from knn import KNN
 from linear_regression import LinearRegression
@@ -15,9 +16,8 @@ from pca import PCA
 from random_forest import RandomForest
 from svm import SVM
 
+
 # %% Cell KNN
-
-
 def do_knn_classify():
     X, y = datasets.make_classification(
         n_samples=500,
@@ -61,8 +61,6 @@ def do_knn_classify():
 
 
 # %% Cell Linear Regression
-
-
 def do_linear_regression():
     X, y = datasets.make_regression(
         n_samples=100, n_features=1, noise=10, random_state=200
@@ -95,8 +93,6 @@ def do_linear_regression():
 
 
 # %% Cell Logistic Regression
-
-
 def do_logistic_regression():
     X, y = datasets.make_classification(
         n_samples=500,
@@ -147,9 +143,8 @@ def do_decision_tree():
 
 do_decision_tree()
 
+
 # %% Cell Random Forest
-
-
 def do_random_forest():
     X, y = datasets.make_classification(
         n_samples=500,
@@ -177,8 +172,6 @@ def do_random_forest():
 
 
 # %% Cell Naive Bayes
-
-
 def do_naive_bayes():
     X, y = datasets.make_classification(
         n_samples=100, n_features=10, n_classes=2, random_state=50
@@ -198,9 +191,8 @@ def do_naive_bayes():
 
 # do_naive_bayes()
 
+
 # %% Cell PCA
-
-
 def do_pca():
     data = datasets.load_iris()
     X, y = data.data, data.target
@@ -229,8 +221,6 @@ def do_pca():
 
 
 # %% Cell Perceptron
-
-
 def do_perceptron():
     X, y = datasets.make_blobs(
         n_samples=150,
@@ -269,12 +259,10 @@ def do_perceptron():
     plt.show()
 
 
-do_perceptron()
+# do_perceptron()
 
 
 # %% Cell SVM
-
-
 def do_svm():
     X, y = datasets.make_blobs(
         n_samples=50,
@@ -296,4 +284,22 @@ def do_svm():
     print(accuracy(y_test, y_pred))
 
 
-do_svm()
+# do_svm()
+
+# %% Cell KMeans
+def do_kmeans():
+    X, y = datasets.make_blobs(
+        centers=5, n_samples=500, n_features=2, random_state=100
+    )
+
+    print(X.shape)
+
+    clusters = len(np.unique(y))
+    print(clusters)
+
+    k = KMeans(K=clusters, max_iters=1500, plot_steps=True)
+    y_pred = k.predict(X)
+
+    k.plot()
+
+do_kmeans()
