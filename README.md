@@ -118,7 +118,7 @@ Entropy is 1 if classes are evenly spread in a node
 
 **Entropy**: $E = - \sum{p(X) \cdot log_2(p(X))}$
 
-Where, $p(X) = \frac{\#x}{n}$, i.e. the number of times class in node / number of total nodes
+Where, $p(X) = \frac{x}{n}$, i.e. the number of times class in node / number of total nodes
 
 **Stopping Criteria**: Maximum depth, minimum number of samples, min impurity decrease.
 
@@ -250,7 +250,7 @@ graph LR
   x1((x1)) --> |w1| s
   x2((x2)) --> |w2| s
   xn((xn)) --> |wn| s
-  s --> step[Activation Function | Step Function] --> out(Output)
+  s --> step[Activation Function or Step Function] --> out(Output)
 ```
 
 #### **Linear Model**
@@ -321,7 +321,7 @@ $$ l = max(0, 1 - y_i (w \cdot x_i - b)) $$
 
 $$ l = \begin{cases}
 0 & \text{if } y \cdot f(x) \ge 1 \\
-1 - y \codt f(x) & \text{otherwise}
+1 - y \cdot f(x) & \text{otherwise}
 \end{cases} $$
 
 Rest is still too complex for me to understand right now. I will take a look at them later
